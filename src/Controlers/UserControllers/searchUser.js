@@ -9,6 +9,12 @@ export class searchUser{
             where: {
                 email: email,
             },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                perfilUser: true,
+            }
             
         });
         

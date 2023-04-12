@@ -1,5 +1,5 @@
 import prismaClient from "../../prisma";
-import * as bcrypt from "bcrypt";
+// import * as bcrypt from "bcrypt";
 
 export class createUsers{
     async createUsers(req,res){
@@ -16,14 +16,14 @@ export class createUsers{
                 return res.status(400).json({ message: "Email Already exists!" });
             }
 
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(password, salt);
+            // const salt = bcrypt.genSaltSync(10);
+            // const hash = bcrypt.hashSync(password, salt);
 
             const users = await prismaClient.user.create({
                 data:{
                     name,
                     email,
-                    password: hash,
+                    password,
                 },
 
                 // Retorna apenas os dados listados abaixo
@@ -31,9 +31,32 @@ export class createUsers{
                     id: true,
                     name: true,
                     email: true,
+                    perfilUser: true,
                 }
             });
 
+                const getIdUser = await prismaClient.user.findFirst({
+                    where:{
+                        email,
+                    },
+                });
+
+                const perfilUsers = await prismaClient.perfilUser.create({
+                data:{
+                    userId: getIdUser.id,
+                },
+
+                // Retorna apenas os dados listados abaixo
+                select: {
+                    cep: true,
+                    rua: true,
+                    numero: true,
+                    bairro: true,
+                    cidade: true,
+                    estado: true,
+                    complemento: true,
+                }
+                });
             return res.status(201).json(users);
                         
         } catch (error) {
