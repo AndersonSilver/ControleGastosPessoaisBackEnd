@@ -100,6 +100,51 @@ export class createUsers{
             return res.status(400).json('Erro na criação de usuarios')
         }
     }
+
+    async listUsers(req,res){
+        try {
+            const users = await prismaClient.user.findMany({
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                },
+            });
+            return res.status(200).json(users);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json('Erro na listagem de usuarios')
+        }
+    }
+
+    async listUsersEmail(req,res){
+        try {
+            const { email } = req.params;
+            const users = await prismaClient.user.findFirst({
+                where:{
+                    email,
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    dadosPessoais: true,
+                    profissional: true,
+                    financeiro: true,
+                    despesa: true,
+                    receita: true,
+                    transferencia: true,
+                    cartaoCredito: true,
+                    contaBancaria: true,
+                },
+            });
+            return res.status(200).json(users);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json('Erro na listagem de usuarios')
+        }
+    }
+
 }
 
 export default new createUsers();

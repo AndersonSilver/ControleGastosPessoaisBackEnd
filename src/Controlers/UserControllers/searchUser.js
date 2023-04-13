@@ -4,7 +4,6 @@ export class searchUser{
     async searchUser(req,res){
     
         const email = req.query.email;
-        console.log(email);
         const user = await prismaClient.user.findMany({
             where: {
                 email: email,
