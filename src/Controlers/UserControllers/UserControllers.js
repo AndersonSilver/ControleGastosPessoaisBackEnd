@@ -12,28 +12,29 @@ export class createUsers{
                 },
             });
 
-            if (getEmail){
-                return res.status(400).json({ message: "Email Already exists!" });
-            }
-
-            // const salt = bcrypt.genSaltSync(10);
-            // const hash = bcrypt.hashSync(password, salt);
-
-            const users = await prismaClient.user.create({
-                data:{
-                    name,
-                    email,
-                    password,
-                },
-
-                // Retorna apenas os dados listados abaixo
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    perfilUser: true,
+                if (getEmail){
+                    return res.status(400).json({ message: "Email Already exists!" });
                 }
-            });
+                const users = await prismaClient.user.create({
+                    data:{
+                        name,
+                        email,
+                        password,
+                    },
+
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        dadosPessoais: true,
+                        profissional: true,
+                        financeiro: true,
+                        despesa: true,
+                        receita: true,
+                        transferencia: true,
+                    },
+
+                });
 
                 const getIdUser = await prismaClient.user.findFirst({
                     where:{
@@ -41,25 +42,47 @@ export class createUsers{
                     },
                 });
 
-                const perfilUsers = await prismaClient.perfilUser.create({
+                const dadosPessoais = await prismaClient.DadosPessoais.create({
                 data:{
                     userId: getIdUser.id,
                 },
 
-                // Retorna apenas os dados listados abaixo
-                select: {
-                    cep: true,
-                    rua: true,
-                    numero: true,
-                    bairro: true,
-                    cidade: true,
-                    estado: true,
-                    complemento: true,
-                }
                 });
+
+                const profissional = await prismaClient.Profissional.create({
+                    data:{
+                        userId: getIdUser.id,
+                },
+                });
+
+                const financeiro = await prismaClient.Financeiro.create({
+                    data:{
+                        userId: getIdUser.id,
+                    },
+                });
+
+                const despesa = await prismaClient.Despesa.create({
+                    data:{
+                        userId: getIdUser.id,
+                },
+                });
+
+                const receita = await prismaClient.Receita.create({
+                    data:{
+                        userId: getIdUser.id,
+                },
+                });
+
+                const transferencia = await prismaClient.Transferencia.create({
+                    data:{
+                        userId: getIdUser.id,
+                },
+                });
+
             return res.status(201).json(users);
                         
         } catch (error) {
+            console.log(error);
             return res.status(400).json('Erro na criação de usuarios')
         }
     }

@@ -11,23 +11,88 @@ datasource db {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
-  name       String
-  email      String       @unique
-  password   String
-  createdAt  DateTime     @default(now())
-  perfilUser perfilUser[]
+  id            Int             @id @default(autoincrement())
+  name          String
+  email         String          @unique
+  password      String
+  createdAt     DateTime        @default(now())
+  dadosPessoais DadosPessoais[]
+  profissional  Profissional[]
+  financeiro    Financeiro[]
+  receita       Receita[]
+  despesa       Despesa[]
+  transferencia Transferencia[]
 }
 
-model perfilUser {
-  id          Int     @id @default(autoincrement())
-  cep         String?
-  rua         String?
-  numero      String?
-  complemento String?
-  bairro      String?
-  cidade      String?
-  estado      String?
-  user        User    @relation(fields: [userId], references: [id])
-  userId      Int     @unique
+model DadosPessoais {
+  id                 Int       @id @default(autoincrement())
+  nameCompleto       String?
+  telefone           Int?
+  cep                String?
+  estado             String?
+  cidade             String?
+  aniversario        DateTime?
+  sexo               String?
+  nascionalidade     String?
+  cpf                String?
+  objetivoFinanceiro String?
+  user               User      @relation(fields: [userId], references: [id])
+  userId             Int       @unique
+}
+
+model Profissional {
+  id           Int     @id @default(autoincrement())
+  escolaridade String?
+  profissao    String?
+  fonteRenda   String?
+  rendaMensal  String?
+  user         User    @relation(fields: [userId], references: [id])
+  userId       Int     @unique
+}
+
+model Financeiro {
+  id               Int     @id @default(autoincrement())
+  tipoMoradia      String?
+  qtdPessoas       Int?
+  qtdCartaoCredito Int?
+  valorPatrimonio  String?
+  possuiVeiculo    String?
+  tipoVeiculo      String?
+  user             User    @relation(fields: [userId], references: [id])
+  userId           Int     @unique
+}
+
+model Receita {
+  id        Int       @id @default(autoincrement())
+  valor     Int?
+  status    String?
+  data      DateTime?
+  descricao String?
+  categoria String?
+  conta     String?
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @unique
+}
+
+model Despesa {
+  id        Int       @id @default(autoincrement())
+  valor     Int?
+  status    String?
+  data      DateTime?
+  descricao String?
+  categoria String?
+  conta     String?
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @unique
+}
+
+model Transferencia {
+  id         Int       @id @default(autoincrement())
+  data       DateTime?
+  observacao String?
+  deConta    String?
+  paraConta  String?
+  valor      Int?
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int       @unique
 }
