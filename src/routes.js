@@ -13,7 +13,7 @@ routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
 
 // Rotas de Dados Pessoais
-routes.post("/createDadosPessoais/:id", DadosPessoaisUser.createDadosPessoais);
+routes.put("/createDadosPessoais/:id", DadosPessoaisUser.createDadosPessoais);
 
 
 

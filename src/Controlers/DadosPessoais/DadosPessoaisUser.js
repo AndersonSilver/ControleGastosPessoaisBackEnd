@@ -3,7 +3,7 @@ import prismaClient from "../../prisma";
 class dadosPessoaisControllers{
     async createDadosPessoais(req, res){
         try{
-        const id = request.params.id;
+        const existingUserId = req.params.id;
         const {
             nameCompleto,     
             telefone,           
@@ -17,7 +17,10 @@ class dadosPessoaisControllers{
             objetivoFinanceiro,
          } = req.body;
 
-        const dadosPessoais = await prismaClient.DadosPessoais.create({
+        const dadosPessoais = await prismaClient.DadosPessoais.update({
+            where:{
+                userId: parseInt(existingUserId),
+            },
             data:{
                 nameCompleto,
                 telefone,
@@ -29,7 +32,7 @@ class dadosPessoaisControllers{
                 nascionalidade,
                 cpf,
                 objetivoFinanceiro,
-                userId: id,
+                user: { connect: { id: parseInt(existingUserId) } },
             },
             select:{
                 id: true,
@@ -46,9 +49,10 @@ class dadosPessoaisControllers{
                 userId: true,
             }
         });
-
+        
         return res.status(201).json(dadosPessoais);
     }catch(err){
+        console.log(err);
         return res.status(400).json('Erro na criação de usuarios');
     }
 }
