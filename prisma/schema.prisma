@@ -68,7 +68,7 @@ model Receita {
   id        Int       @id @default(autoincrement())
   valor     Int?
   status    String?
-  data      DateTime?
+  data      String?
   descricao String?
   categoria String?
   conta     String?
@@ -80,7 +80,7 @@ model Despesa {
   id        Int       @id @default(autoincrement())
   valor     Int?
   status    String?
-  data      DateTime?
+  data      String?
   descricao String?
   categoria String?
   conta     String?
@@ -90,7 +90,7 @@ model Despesa {
 
 model Transferencia {
   id         Int       @id @default(autoincrement())
-  data       DateTime?
+  data       String?
   observacao String?
   deConta    String?
   paraConta  String?

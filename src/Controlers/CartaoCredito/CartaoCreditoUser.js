@@ -10,3 +10,5 @@ class CartaoCreditoUserControler {
   async deleteCartaoCredito(req, res) {
   }
 }
+
+export default new CartaoCreditoUserControler();

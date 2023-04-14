@@ -1,12 +1,14 @@
 import prismaClient from "../../prisma";
 
-class CartaoCreditoUserControler {
-  async updateCartaoCredito(req, res) {
-  }
-  async getCartaoCreditoByEmail(req, res) {
-  }
-  async getCartaoCreditoAll(req, res) {
-  }
-  async deleteCartaoCredito(req, res) {
-  }
+class ContaBancariaUserControler {
+    async updateContaBancaria(req, res) {
+    }
+    async getContaBancariaByEmail(req, res) {
+    }
+    async getContaBancariaAll(req, res) {
+    }
+    async deleteContaBancaria(req, res) {
+    }
 }
+
+export default new ContaBancariaUserControler();
