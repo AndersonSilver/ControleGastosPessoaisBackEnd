@@ -1,7 +1,7 @@
 import prismaClient from "../../prisma";
 
 class dadosPessoaisControllers{
-    async createDadosPessoais(req, res){
+    async updateDadosPessoais(req, res){
         try{
         const existingUserId = req.params.id;
         const {
@@ -55,7 +55,63 @@ class dadosPessoaisControllers{
         console.log(err);
         return res.status(400).json('Erro na criação de usuarios');
     }
-}
-}
+    }
+
+    async getDadosPessoaisByEmail(req, res){
+        try{
+            const existingUserEmail = req.params.email;
+
+            const dados = await prismaClient.DadosPessoais.findFirst({
+                where:{
+                    user: {
+                        email: existingUserEmail,
+                    },
+                },
+                // include:{
+                //     user: true,
+                // },
+            });
+            return res.status(200).json(dados);
+        }catch(err){
+            console.log(err);
+            return res.status(400).json('Erro na pesquisa de usuarios');
+        }
+    }
+
+    async getDadosPessoaisAll(req, res){
+        try{
+            const dados = await prismaClient.DadosPessoais.findMany({
+                include:{
+                    user: true,
+                },
+            });
+            return res.status(200).json(dados);
+        }catch(err){
+            console.log(err);
+            return res.status(400).json('Erro na pesquisa de usuarios');
+        }
+    }
+
+    async deleteDadosPessoais(req, res){
+
+            try{
+                const existingUserEmail = req.params.email;
+
+                const dados = await prismaClient.DadosPessoais.deleteMany({
+                    where:{
+                        user: {
+                            email: existingUserEmail,
+                        },
+                    },
+                });
+                return res.status(200).json(dados);
+            }catch(err){
+                console.log(err);
+                return res.status(400).json('Erro na pesquisa de usuarios');
+            }
+
+
+    }
+}   
 
 export default new dadosPessoaisControllers();
