@@ -15,7 +15,7 @@ const routes = new Router();
 // Rotas de Usuário - CONCLUIDO
 routes.post("/createUser", UserControllers.createUsers);
 routes.get("/searchUserAll", UserControllers.getUser);
-routes.get("/searchUser/:email", UserControllers.getUserByEmail);
+routes.get("/searchUser", UserControllers.getUserByEmail);
 routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
 

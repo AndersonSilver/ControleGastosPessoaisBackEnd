@@ -119,25 +119,11 @@ export class User{
     }
 
     async getUserByEmail(req,res){
-        const email = req.params.email;
+        const email = req.query.email;
         try {
             const user = await prismaClient.User.findFirst({
                 where: {
                     email: email,
-                },
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    password: true,
-                    dadosPessoais: true,
-                    profissional: true,
-                    financeiro: true,
-                    despesa: true,
-                    receita: true,
-                    transferencia: true,
-                    cartaoCredito: true,
-                    contaBancaria: true,
                 },
             });
             if (user === null) {
