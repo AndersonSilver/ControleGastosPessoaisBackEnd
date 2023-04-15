@@ -12,33 +12,33 @@ import ContaBancariaUser from "./Controlers/ContaBancaria/ContaBancariaUser.js";
 
 const routes = new Router();
 
-// Rotas de Usuário
+// Rotas de Usuário - CONCLUIDO
 routes.post("/createUser", UserControllers.createUsers);
 routes.get("/searchUserAll", UserControllers.getUser);
 routes.get("/searchUser/:email", UserControllers.getUserByEmail);
 routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
 
-// Rotas de Dados Pessoais
+// Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais/:id", DadosPessoaisUser.updateDadosPessoais);
 routes.get("/searchDadosPessoais/:email", DadosPessoaisUser.getDadosPessoaisByEmail);
 routes.get("/searchDadosPessoaisAll", DadosPessoaisUser.getDadosPessoaisAll);
 routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoais);
 
-// Rotas de Profissional
+// Rotas de Profissional - CONCLUIDO
 routes.put("/createProfissional/:id", ProfissionalUser.updateProfissional);
 routes.get("/searchProfissional/:email", ProfissionalUser.getProfissionalByEmail);
 routes.get("/searchProfissionalAll", ProfissionalUser.getProfissionalAll);
 routes.delete("/deleteProfissional/:email", ProfissionalUser.deleteProfissional);
 
-// Rotas de Financeiro
+// Rotas de Financeiro - CONCLUIDO
 
 routes.put("/createFinanceiro/:id", FinanceiroUser.updateFinanceiro);
 routes.get("/searchFinanceiro/:email", FinanceiroUser.getFinanceiroByEmail);
 routes.get("/searchFinanceiroAll", FinanceiroUser.getFinanceiroAll);
 routes.delete("/deleteFinanceiro/:email", FinanceiroUser.deleteFinanceiro);
 
-// Rotas de Despesa
+// Rotas de Despesa - CONCLUIDO
 
 routes.put("/createDespesa/:id", DespesaUser.updateDespesa);
 routes.get("/searchDespesa/:email", DespesaUser.getDespesaByEmail);
