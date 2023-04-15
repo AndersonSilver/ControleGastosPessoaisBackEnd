@@ -101,6 +101,7 @@ model Transferencia {
 
 model CartaoCredito {
   id             Int     @id @default(autoincrement())
+  nome           String?
   limite         Int?
   dataVencimento String?
   dataFechamento String?
@@ -110,6 +111,7 @@ model CartaoCredito {
 }
 
 model ContaBancaria {
+  id          Int     @id @default(autoincrement())
   instituicao String?
   descricao   String?
   tipoConta   String?
