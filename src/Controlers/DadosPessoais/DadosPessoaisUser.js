@@ -59,7 +59,7 @@ class dadosPessoaisControllers{
 
     async getDadosPessoaisByEmail(req, res){
         try{
-            const existingUserEmail = req.params.email;
+            const existingUserEmail = req.query.email;
 
             const dados = await prismaClient.DadosPessoais.findFirst({
                 where:{

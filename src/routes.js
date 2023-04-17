@@ -21,7 +21,7 @@ routes.delete("/deleteUser/:email", UserControllers.deleteUser);
 
 // Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais/:id", DadosPessoaisUser.updateDadosPessoais);
-routes.get("/searchDadosPessoais/:email", DadosPessoaisUser.getDadosPessoaisByEmail);
+routes.get("/searchDadosPessoais", DadosPessoaisUser.getDadosPessoaisByEmail);
 routes.get("/searchDadosPessoaisAll", DadosPessoaisUser.getDadosPessoaisAll);
 routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoais);
 
