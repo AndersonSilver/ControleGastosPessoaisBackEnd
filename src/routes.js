@@ -9,6 +9,7 @@ import ReceitaUser from "./Controlers/Receita/ReceitaUser.js";
 import TransferenciaUser from "./Controlers/Transferencia/TransferenciaUser.js";
 import CartaoCreditoUser from "./Controlers/CartaoCredito/CartaoCreditoUser.js";
 import ContaBancariaUser from "./Controlers/ContaBancaria/ContaBancariaUser.js";
+import AuthUserController from "./Controlers/Usuario/AuthUserController.js"
 
 const routes = new Router();
 
@@ -18,6 +19,8 @@ routes.get("/searchUserAll", UserControllers.getUser);
 routes.get("/searchUser", UserControllers.getUserByEmail);
 routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
+
+routes.get('/session', AuthUserController.authUserController);
 
 // Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais/:id", DadosPessoaisUser.updateDadosPessoais);

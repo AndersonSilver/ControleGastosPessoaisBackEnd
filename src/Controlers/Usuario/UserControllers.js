@@ -1,10 +1,13 @@
 import prismaClient from "../../prisma";
-// import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 
 export class User{
     async createUsers(req,res){
         try {
+
             const { name, email, password } = req.body;
+            
+            const hash = await bcrypt.hash(req.body.password, 10);
 
             const getEmail = await prismaClient.user.findFirst({
                 where:{
@@ -19,7 +22,7 @@ export class User{
                     data:{
                         name,
                         email,
-                        password,
+                        password: hash,
                     },
 
                     select: {
