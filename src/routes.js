@@ -14,14 +14,17 @@ import AuthMidlleware from "./Midlewares/AuthMidlleware.js"
 
 const routes = new Router();
 
+routes.get('/session', AuthUserController.authUserController);
+
 // Rotas de Usuário - CONCLUIDO
 routes.post("/createUser", UserControllers.createUsers);
+
+routes.use(AuthMidlleware);
+
 routes.get("/searchUserAll", UserControllers.getUser);
-routes.get("/searchUser", AuthMidlleware, UserControllers.getUserByEmail);
+routes.get("/searchUser", UserControllers.getUserByEmail);
 routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
-
-routes.get('/session', AuthUserController.authUserController);
 
 // Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais/:id", DadosPessoaisUser.updateDadosPessoais);
