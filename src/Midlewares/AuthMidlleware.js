@@ -15,6 +15,7 @@ async function Midlewares(req, res, next){
         const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 
         req.userId = decoded.id;
+        
 
         if (!decoded) {
             return res.status(401).json({ error: "Token invalid" });
@@ -23,8 +24,8 @@ async function Midlewares(req, res, next){
         if(decoded.id === undefined){
             return res.status(401).json({ error: "Token invalid" });
         }
-
-        return next();
+        console.log(decoded);
+        // return next();
     } catch (err) {
         console.log(err);
         return res.status(401).json({ error: "Token invalid" });

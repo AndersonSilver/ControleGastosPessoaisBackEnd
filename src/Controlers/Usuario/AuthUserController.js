@@ -3,6 +3,7 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../../Config/auth";
 
+
 class AuthUserController{
     async authUserController(req,res){
         const { email, password } = req.query;
@@ -29,8 +30,6 @@ class AuthUserController{
             config.secret,
             { expiresIn: config.expireIn }
           );
-
-          res.setHeader("Authorization", `Bearer ${token}`);
       
           return res.json({
             auth,
@@ -38,9 +37,6 @@ class AuthUserController{
             message: "User authenticated",
             getEmail
           });
-          
-        
-        
     }
 }
 
