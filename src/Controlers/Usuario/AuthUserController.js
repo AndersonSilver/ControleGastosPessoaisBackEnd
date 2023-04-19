@@ -29,6 +29,8 @@ class AuthUserController{
             config.secret,
             { expiresIn: config.expireIn }
           );
+
+          res.setHeader("Authorization", `Bearer ${token}`);
       
           return res.json({
             auth,

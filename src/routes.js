@@ -25,7 +25,7 @@ routes.get('/session', AuthUserController.authUserController);
 
 // Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais/:id", DadosPessoaisUser.updateDadosPessoais);
-routes.get("/searchDadosPessoais", AuthMidlleware, DadosPessoaisUser.getDadosPessoaisByEmail);
+routes.get("/searchDadosPessoais",AuthMidlleware,DadosPessoaisUser.getDadosPessoaisByEmail);
 routes.get("/searchDadosPessoaisAll", DadosPessoaisUser.getDadosPessoaisAll);
 routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoais);
 
