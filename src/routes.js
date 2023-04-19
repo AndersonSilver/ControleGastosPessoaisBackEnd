@@ -10,13 +10,14 @@ import TransferenciaUser from "./Controlers/Transferencia/TransferenciaUser.js";
 import CartaoCreditoUser from "./Controlers/CartaoCredito/CartaoCreditoUser.js";
 import ContaBancariaUser from "./Controlers/ContaBancaria/ContaBancariaUser.js";
 import AuthUserController from "./Controlers/Usuario/AuthUserController.js"
+import AuthMidlleware from "./Midlewares/AuthMidlleware.js"
 
 const routes = new Router();
 
 // Rotas de Usuário - CONCLUIDO
 routes.post("/createUser", UserControllers.createUsers);
 routes.get("/searchUserAll", UserControllers.getUser);
-routes.get("/searchUser", UserControllers.getUserByEmail);
+routes.get("/searchUser", AuthMidlleware, UserControllers.getUserByEmail);
 routes.put("/updateUser/:email", UserControllers.updateUser);
 routes.delete("/deleteUser/:email", UserControllers.deleteUser);
 
