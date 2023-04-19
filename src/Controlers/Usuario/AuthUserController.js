@@ -34,6 +34,7 @@ class AuthUserController{
             auth,
             token,
             message: "User authenticated",
+            getEmail
           });
           
         
