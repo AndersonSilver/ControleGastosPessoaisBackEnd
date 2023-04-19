@@ -24,8 +24,8 @@ async function Midlewares(req, res, next){
         if(decoded.id === undefined){
             return res.status(401).json({ error: "Token invalid" });
         }
-        console.log(decoded);
-        // return next();
+        
+        return next();
     } catch (err) {
         console.log(err);
         return res.status(401).json({ error: "Token invalid" });
