@@ -3,7 +3,7 @@ import prismaClient from "../../prisma";
 class dadosPessoaisControllers{
     async updateDadosPessoais(req, res){
         try{
-        const existingUserId = req.params.id;
+        const existingUserId = req.query.id;
         const {
             nameCompleto,     
             telefone,           
