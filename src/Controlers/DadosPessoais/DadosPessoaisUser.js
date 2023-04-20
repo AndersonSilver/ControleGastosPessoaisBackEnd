@@ -57,19 +57,17 @@ class dadosPessoaisControllers{
     }
     }
 
-    async getDadosPessoaisByEmail(req, res){
+    async getDadosPessoaisById(req, res){
         try{
-            const existingUserEmail = req.query.email;
+            const existingUserId = req.query.id;
 
             const dados = await prismaClient.DadosPessoais.findFirst({
                 where:{
                     user: {
-                        email: existingUserEmail,
+                        id: parseInt(existingUserId),
                     },
                 },
-                // include:{
-                //     user: true,
-                // },
+
             });
             return res.status(200).json(dados);
         }catch(err){
