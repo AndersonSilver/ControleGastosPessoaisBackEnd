@@ -32,12 +32,12 @@ class ProfissionalControllers{
 
     async getProfissionalByEmail(req, res){
         try{
-            const existingUserEmail = req.params.email;
+            const existingUserId = req.query.id;
 
             const dados = await prismaClient.Profissional.findMany({
                 where:{
                     user:{
-                        email: existingUserEmail,
+                        id: parseInt(existingUserId),
                     }
                     
                 },

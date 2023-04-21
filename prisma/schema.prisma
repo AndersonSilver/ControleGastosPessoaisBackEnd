@@ -43,13 +43,17 @@ model DadosPessoais {
 }
 
 model Profissional {
-  id           Int     @id @default(autoincrement())
-  escolaridade String?
-  profissao    String?
-  fonteRenda   String?
-  rendaMensal  String?
-  user         User    @relation(fields: [userId], references: [id])
-  userId       Int     @unique
+  id                    Int     @id @default(autoincrement())
+  escolaridade          String?
+  profissao             String?
+  fonteRenda            String?
+  rendaMensal           String?
+  empresaAtual          String?
+  atividadeDesenvolvida String?
+  emailComercial        String?
+  telefoneComercial     String?
+  user                  User    @relation(fields: [userId], references: [id])
+  userId                Int     @unique
 }
 
 model Financeiro {
@@ -65,38 +69,38 @@ model Financeiro {
 }
 
 model Receita {
-  id        Int       @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   valor     Int?
   status    String?
   data      String?
   descricao String?
   categoria String?
   conta     String?
-  user      User      @relation(fields: [userId], references: [id])
-  userId    Int       @unique
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
 }
 
 model Despesa {
-  id        Int       @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   valor     Int?
   status    String?
   data      String?
   descricao String?
   categoria String?
   conta     String?
-  user      User      @relation(fields: [userId], references: [id])
-  userId    Int       @unique
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
 }
 
 model Transferencia {
-  id         Int       @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   data       String?
   observacao String?
   deConta    String?
   paraConta  String?
   valor      Int?
-  user       User      @relation(fields: [userId], references: [id])
-  userId     Int       @unique
+  user       User    @relation(fields: [userId], references: [id])
+  userId     Int     @unique
 }
 
 model CartaoCredito {

@@ -34,7 +34,7 @@ routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoa
 
 // Rotas de Profissional - CONCLUIDO
 routes.put("/createProfissional/:id", ProfissionalUser.updateProfissional);
-routes.get("/searchProfissional/:email", ProfissionalUser.getProfissionalByEmail);
+routes.get("/searchProfissional", ProfissionalUser.getProfissionalByEmail);
 routes.get("/searchProfissionalAll", ProfissionalUser.getProfissionalAll);
 routes.delete("/deleteProfissional/:email", ProfissionalUser.deleteProfissional);
 
