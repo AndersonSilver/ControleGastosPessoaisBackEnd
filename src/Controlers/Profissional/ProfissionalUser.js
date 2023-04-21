@@ -3,24 +3,42 @@ import prismaClient from "../../prisma";
 class ProfissionalControllers{
     async updateProfissional(req, res){
         try{
-            const existingUserId = req.params.id;
+            const existingUserId = req.query.id;
 
             const { 
                 escolaridade,
                 profissao,
                 fonteRenda,
                 rendaMensal,
+                empresaAtual,
+                atividadeDesenvolvida,
+                emailComercial,
+                telefoneComercial,
              } = req.body;
+             
+             const dadosExistentes = await prismaClient.Profissional.findUnique({
+                where: {
+                    userId: parseInt(existingUserId),
+                },
+              });
+            //   console.log(dadosExistentes);
+              if (!dadosExistentes) {
+                return res.status(400).json('Registro não encontrado.');
+              }
 
             const dados = await prismaClient.Profissional.update({
                 where:{
-                    id: parseInt(existingUserId),
+                    userId: parseInt(existingUserId),
                 },
                 data:{
-                    escolaridade,
-                    profissao,
-                    fonteRenda,
-                    rendaMensal,
+                escolaridade,
+                profissao,
+                fonteRenda,
+                rendaMensal,
+                empresaAtual,
+                atividadeDesenvolvida,
+                emailComercial,
+                telefoneComercial,
                 },
             });
             return res.status(200).json(dados);
@@ -36,9 +54,12 @@ class ProfissionalControllers{
 
             const dados = await prismaClient.Profissional.findMany({
                 where:{
-                    user:{
-                        id: parseInt(existingUserId),
-                    }
+
+                    userId: parseInt(existingUserId),
+
+                    // user:{
+                    //     id: parseInt(existingUserId),
+                    // }
                     
                 },
             });
