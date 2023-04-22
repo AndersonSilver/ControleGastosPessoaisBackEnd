@@ -4,7 +4,7 @@ class FinanceiroUserControler {
 
   async updateFinanceiro(req, res) {
     try{
-      const existingUserId = req.params.id;
+      const existingUserId = req.query.id;
 
       const { 
         tipoMoradia,
@@ -17,7 +17,7 @@ class FinanceiroUserControler {
 
       const financeiro = await prismaClient.Financeiro.update({
         where: {
-          id: Number(existingUserId),
+          userId: Number(existingUserId),
         },
         data: {
           tipoMoradia,
@@ -36,13 +36,13 @@ class FinanceiroUserControler {
   }
   async getFinanceiroByEmail(req, res) {
     try{
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
 
       const financeiro = await prismaClient.Financeiro.findMany({
         where: {
-            user: {
-              email: existingUserEmail,
-            }
+
+          userId: parseInt(existingUserId),
+
         },
       });
       return res.status(200).json(financeiro);

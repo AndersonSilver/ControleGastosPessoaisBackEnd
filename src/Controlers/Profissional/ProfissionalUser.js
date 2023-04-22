@@ -68,11 +68,7 @@ class ProfissionalControllers{
                 where:{
 
                     userId: parseInt(existingUserId),
-
-                    // user:{
-                    //     id: parseInt(existingUserId),
-                    // }
-                    
+   
                 },
             });
             return res.status(200).json(dados);

@@ -40,8 +40,8 @@ routes.delete("/deleteProfissional/:email", ProfissionalUser.deleteProfissional)
 
 // Rotas de Financeiro - CONCLUIDO
 
-routes.put("/createFinanceiro/:id", FinanceiroUser.updateFinanceiro);
-routes.get("/searchFinanceiro/:email", FinanceiroUser.getFinanceiroByEmail);
+routes.put("/createFinanceiro", FinanceiroUser.updateFinanceiro);
+routes.get("/searchFinanceiro", FinanceiroUser.getFinanceiroByEmail);
 routes.get("/searchFinanceiroAll", FinanceiroUser.getFinanceiroAll);
 routes.delete("/deleteFinanceiro/:email", FinanceiroUser.deleteFinanceiro);
 
