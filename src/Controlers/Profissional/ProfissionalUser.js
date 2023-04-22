@@ -21,7 +21,7 @@ class ProfissionalControllers{
                     userId: parseInt(existingUserId),
                 },
               });
-            //   console.log(dadosExistentes);
+            
               if (!dadosExistentes) {
                 return res.status(400).json('Registro não encontrado.');
               }
@@ -39,7 +39,19 @@ class ProfissionalControllers{
                 atividadeDesenvolvida,
                 emailComercial,
                 telefoneComercial,
+                user: { connect: { id: parseInt(existingUserId) } },
                 },
+                select:{
+                    escolaridade: true,
+                    profissao: true,
+                    fonteRenda: true,
+                    rendaMensal: true,
+                    empresaAtual: true,
+                    atividadeDesenvolvida: true,
+                    emailComercial: true,
+                    telefoneComercial: true,
+                }
+
             });
             return res.status(200).json(dados);
         }catch(err){

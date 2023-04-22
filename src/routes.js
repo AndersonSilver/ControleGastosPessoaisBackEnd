@@ -33,7 +33,7 @@ routes.get("/searchDadosPessoaisAll", DadosPessoaisUser.getDadosPessoaisAll);
 routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoais);
 
 // Rotas de Profissional - CONCLUIDO
-routes.put("/createProfissional/:id", ProfissionalUser.updateProfissional);
+routes.put("/createProfissional", ProfissionalUser.updateProfissional);
 routes.get("/searchProfissional", ProfissionalUser.getProfissionalByEmail);
 routes.get("/searchProfissionalAll", ProfissionalUser.getProfissionalAll);
 routes.delete("/deleteProfissional/:email", ProfissionalUser.deleteProfissional);
