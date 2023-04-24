@@ -6,7 +6,11 @@ class ReceitaUserControler {
     try {
       const { valor, status, data, descricao, categoria, conta } = req.body;
   
-      const existingUserId = req.query.Id;
+      const existingUserId = req.query.id;
+
+      if (!/^\d+$/.test(existingUserId)) {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
   
       const user = await prismaClient.user.findFirst({
         where: {
@@ -28,9 +32,9 @@ class ReceitaUserControler {
           conta,
           user: {
             connect: {
-              id: user.id,
+                id: user.id,
             },
-          },
+        },
         },
       });
   
