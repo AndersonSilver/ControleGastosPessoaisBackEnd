@@ -54,7 +54,8 @@ routes.delete("/deleteDespesa/:email", DespesaUser.deleteDespesa);
 
 // Rotas de Receita
 
-routes.put("/createReceita/:id", ReceitaUser.updateReceita);
+routes.post("/createReceita", ReceitaUser.createReceita);
+routes.put("/updateReceita", ReceitaUser.updateReceita);
 routes.get("/searchReceita/:email", ReceitaUser.getReceitaByEmail);
 routes.get("/searchReceitaAll", ReceitaUser.getReceitaAll);
 routes.delete("/deleteReceita/:email", ReceitaUser.deleteReceita);

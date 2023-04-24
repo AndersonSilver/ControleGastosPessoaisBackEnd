@@ -32,11 +32,11 @@ export class User{
                         dadosPessoais: true,
                         profissional: true,
                         financeiro: true,
-                        despesa: true,
-                        receita: true,
-                        transferencia: true,
-                        cartaoCredito: true,
-                        contaBancaria: true,
+                        // despesa: true,
+                        // receita: true,
+                        // transferencia: true,
+                        // cartaoCredito: true,
+                        // contaBancaria: true,
                     },
 
                 });
@@ -66,35 +66,35 @@ export class User{
                     },
                 });
 
-                const despesa = await prismaClient.Despesa.create({
-                    data:{
-                        userId: getIdUser.id,
-                },
-                });
+                // const despesa = await prismaClient.Despesa.create({
+                //     data:{
+                //         userId: getIdUser.id,
+                // },
+                // });
 
-                const receita = await prismaClient.Receita.create({
-                    data:{
-                        userId: getIdUser.id,
-                },
-                });
+                // const receita = await prismaClient.Receita.create({
+                //     data:{
+                //         userId: getIdUser.id,
+                // },
+                // });
 
-                const transferencia = await prismaClient.Transferencia.create({
-                    data:{
-                        userId: getIdUser.id,
-                },
-                });
+                // const transferencia = await prismaClient.Transferencia.create({
+                //     data:{
+                //         userId: getIdUser.id,
+                // },
+                // });
 
-                const cartaoCredito = await prismaClient.CartaoCredito.create({
-                    data:{
-                        userId: getIdUser.id,
-                },
-                });
+                // const cartaoCredito = await prismaClient.CartaoCredito.create({
+                //     data:{
+                //         userId: getIdUser.id,
+                // },
+                // });
 
-                const contaBancaria = await prismaClient.ContaBancaria.create({
-                    data:{
-                        userId: getIdUser.id,
-                },
-                });
+                // const contaBancaria = await prismaClient.ContaBancaria.create({
+                //     data:{
+                //         userId: getIdUser.id,
+                // },
+                // });
 
             return res.status(201).json(users);
                         

@@ -1,9 +1,48 @@
 import prismaClient from "../../prisma";
 
 class ReceitaUserControler {
+
+  async createReceita(req, res) {
+    try {
+      const { valor, status, data, descricao, categoria, conta } = req.body;
+  
+      const existingUserId = req.query.Id;
+  
+      const user = await prismaClient.user.findFirst({
+        where: {
+          id: parseInt(existingUserId),
+        },
+      });
+  
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+      console.log(user.id)
+      const receita = await prismaClient.Receita.create({
+        data: {
+          valor: Number(valor),
+          status, 
+          data,
+          descricao,
+          categoria,
+          conta,
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+        },
+      });
+  
+      return res.status(200).json(receita);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: "Erro ao criar dados Receitas" });
+    }
+  }
   async updateReceita(req, res) {
     try {
-      const existingUserId = req.params.id;
+      const existingUserId = parseInt(req.query.id);
 
       const {
         valor,
@@ -16,7 +55,7 @@ class ReceitaUserControler {
 
       const receita = await prismaClient.Receita.update({
         where: {
-          id: Number(existingUserId),
+          userId: existingUserId,
         },
         data: {
           valor: Number(valor),
@@ -30,7 +69,13 @@ class ReceitaUserControler {
       return res.status(200).json(receita);
     } catch (error) {
       console.log(error);
-      return res.status(400).json({ message: "Erro ao atualizar dados financeiros" });
+      if (error.code === 'P2025') {
+        return res.status(404).json({ message: "Receita não encontrada" });
+      } else if (error.code === 'P2002') {
+        return res.status(422).json({ message: "Um dos campos fornecidos é inválido" });
+      } else {
+        return res.status(500).json({ message: "Erro ao atualizar dados da Receita" });
+      }
     }
   }
   async getReceitaByEmail(req, res) {
