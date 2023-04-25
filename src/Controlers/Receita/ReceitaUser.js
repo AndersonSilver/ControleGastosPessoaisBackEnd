@@ -82,15 +82,15 @@ class ReceitaUserControler {
       }
     }
   }
-  async getReceitaByEmail(req, res) {
+  async getReceitaById(req, res) {
 
-    const existingUserEmail = req.params.email;
+    const existingUserId = req.query.id;
 
     try {
       const receita = await prismaClient.Receita.findMany({
         where: {
           user: {
-            email: existingUserEmail,
+            id: parseInt(existingUserId),
           },
         },
       });
