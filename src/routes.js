@@ -47,8 +47,9 @@ routes.delete("/deleteFinanceiro/:email", FinanceiroUser.deleteFinanceiro);
 
 // Rotas de Despesa - CONCLUIDO
 
-routes.put("/createDespesa/:id", DespesaUser.updateDespesa);
-routes.get("/searchDespesa/:email", DespesaUser.getDespesaByEmail);
+routes.post("/createDespesa", DespesaUser.createDespesa);
+routes.put("/updateDespesa/:id", DespesaUser.updateDespesa);
+routes.get("/searchDespesa", DespesaUser.getDespesaById);
 routes.get("/searchDespesaAll", DespesaUser.getDespesaAll);
 routes.delete("/deleteDespesa/:email", DespesaUser.deleteDespesa);
 
