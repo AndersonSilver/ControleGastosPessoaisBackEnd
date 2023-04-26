@@ -102,13 +102,11 @@ class DespesaUserControler {
   }
   async deleteDespesa(req, res) {
     try {
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
 
       const despesa = await prismaClient.Despesa.deleteMany({
         where: {
-          user: {
-            email: existingUserEmail,
-          },
+            id: Number(existingUserId),
         },
       });
       return res.status(200).json(despesa);

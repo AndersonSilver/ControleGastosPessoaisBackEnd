@@ -112,13 +112,11 @@ class ReceitaUserControler {
   async deleteReceita(req, res) {
     
     try {
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
 
       const receita = await prismaClient.Receita.deleteMany({
         where: {
-          user:{
-            email: existingUserEmail,
-          }
+            id: Number(existingUserId),
         },
       });
       return res.status(200).json(receita);

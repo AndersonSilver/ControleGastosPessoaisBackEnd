@@ -51,7 +51,7 @@ routes.post("/createDespesa", DespesaUser.createDespesa);
 routes.put("/updateDespesa/:id", DespesaUser.updateDespesa);
 routes.get("/searchDespesa", DespesaUser.getDespesaById);
 routes.get("/searchDespesaAll", DespesaUser.getDespesaAll);
-routes.delete("/deleteDespesa/:email", DespesaUser.deleteDespesa);
+routes.delete("/deleteDespesa", DespesaUser.deleteDespesa);
 
 // Rotas de Receita
 
@@ -59,7 +59,7 @@ routes.post("/createReceita", ReceitaUser.createReceita);
 routes.put("/updateReceita", ReceitaUser.updateReceita);
 routes.get("/searchReceita", ReceitaUser.getReceitaById);
 routes.get("/searchReceitaAll", ReceitaUser.getReceitaAll);
-routes.delete("/deleteReceita/:email", ReceitaUser.deleteReceita);
+routes.delete("/deleteReceita", ReceitaUser.deleteReceita);
 
 // Rotas de Transferencia
 
