@@ -70,10 +70,11 @@ routes.delete("/deleteTransferencia/:email", TransferenciaUser.deleteTransferenc
 
 // Rotas de Cartão de Crédito
 
+routes.post("/createCartaoCredito", CartaoCreditoUser.createCartaoCredito)
 routes.put("/createCartaoCredito/:id", CartaoCreditoUser.updateCartaoCredito);
-routes.get("/searchCartaoCredito/:email", CartaoCreditoUser.getCartaoCreditoByEmail);
+routes.get("/searchCartaoCredito", CartaoCreditoUser.getCartaoCreditoById);
 routes.get("/searchCartaoCreditoAll", CartaoCreditoUser.getCartaoCreditoAll);
-routes.delete("/deleteCartaoCredito/:email", CartaoCreditoUser.deleteCartaoCredito);
+routes.delete("/deleteCartaoCredito", CartaoCreditoUser.deleteCartaoCredito);
 
 // Rotas de Conta Bancária
 

@@ -1,6 +1,54 @@
 import prismaClient from "../../prisma";
 
 class CartaoCreditoUserControler {
+
+  async createCartaoCredito(req, res) {
+    try {
+      const existingUserId = parseInt(req.query.id);
+      console.log(existingUserId);
+      const {
+        nome,
+        limite,
+        dataVencimento,
+        dataFechamento,
+        bandeira,
+      } = req.body;
+
+      if (!/^\d+$/.test(existingUserId)) {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+  
+      const user = await prismaClient.User.findUnique({
+        where: {
+            id: existingUserId,
+        },
+      });
+  
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+
+      const cartaoCredito = await prismaClient.CartaoCredito.create({
+        data: {
+          nome,
+          limite: Number(limite),
+          dataVencimento,
+          dataFechamento,
+          bandeira,
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+        },
+      });
+      return res.status(200).json(cartaoCredito);
+      
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: "Erro ao criar Cartao de Crédito" });
+    }
+  }
   async updateCartaoCredito(req, res) {
     try {
       const existingUserId = req.params.id;
@@ -31,14 +79,14 @@ class CartaoCreditoUserControler {
       return res.status(400).json({ message: "Erro ao atualizar Cartao de Crédito" });
     }
   }
-  async getCartaoCreditoByEmail(req, res) {
+  async getCartaoCreditoById(req, res) {
 
     try {
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
       const cartaoCredito = await prismaClient.CartaoCredito.findMany({
         where:{
           user:{
-            email: existingUserEmail
+            id: parseInt(existingUserId)
           },
         },
       });
@@ -58,14 +106,12 @@ class CartaoCreditoUserControler {
     }
   }
   async deleteCartaoCredito(req, res) {
-    const existingUserEmail = req.params.email;
+    const existingUserId = req.query.id;
 
     try {
       const cartaoCredito = await prismaClient.CartaoCredito.deleteMany({
         where:{
-          user:{
-            email: existingUserEmail
-          },
+            id: Number(existingUserId)
         },
       });
       return res.status(200).json(cartaoCredito);
