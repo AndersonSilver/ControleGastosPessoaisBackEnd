@@ -1,6 +1,50 @@
 import prismaClient from "../../prisma";
 
 class ContaBancariaUserControler {
+
+    async createContaBancaria(req, res) {
+        try {
+            const existingUserId = parseInt(req.query.id);
+            const {
+                instituicao,
+                descricao,
+                tipoConta,
+                saldo,
+            } = req.body;
+
+            if (!/^\d+$/.test(existingUserId)) {
+                return res.status(400).json({ message: "Invalid user ID" });
+              }
+          
+              const user = await prismaClient.User.findUnique({
+                where: {
+                    id: existingUserId,
+                },
+              });
+          
+              if (!user) {
+                return res.status(400).json({ message: "User not found" });
+              }
+
+            const contaBancaria = await prismaClient.ContaBancaria.create({
+                data: {
+                    instituicao,
+                    descricao,
+                    tipoConta,
+                    saldo: Number(saldo),
+                    user: {
+                        connect: {
+                            id: user.id,
+                        },
+                    },
+                },
+            });
+            return res.status(200).json(contaBancaria);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Erro ao criar Conta Bancária" });
+        }
+    }
     async updateContaBancaria(req, res) {
         try {
             const existingUserId = req.params.id;
@@ -27,16 +71,15 @@ class ContaBancariaUserControler {
             return res.status(400).json({ message: "Erro ao atualizar Conta Bancária" });
         }
     }
-    async getContaBancariaByEmail(req, res) {
+    async getContaBancariaById(req, res) {
         try{
-            const existingUserEmail = req.params.email;
+            const existingUserId = req.query.id;
 
-            const contaBancaria = await prismaClient.ContaBancaria.findFirst({
+            const contaBancaria = await prismaClient.ContaBancaria.findMany({
                 where: {
                     user:{
-                        email: existingUserEmail,
+                        id: parseInt(existingUserId),
                     }
-                    
                 },
             });
             return res.status(200).json(contaBancaria);
@@ -56,13 +99,11 @@ class ContaBancariaUserControler {
     }
     async deleteContaBancaria(req, res) {
         try{
-            const existingUserEmail = req.params.email;
+            const existingUserId = req.query.id;
 
             const contaBancaria = await prismaClient.ContaBancaria.deleteMany({
                 where:{
-                    user:{
-                        email: existingUserEmail,
-                    }
+                        id: Number(existingUserId),
                 }
             });
             return res.status(200).json(contaBancaria);

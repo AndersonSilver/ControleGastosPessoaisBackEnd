@@ -78,9 +78,10 @@ routes.delete("/deleteCartaoCredito", CartaoCreditoUser.deleteCartaoCredito);
 
 // Rotas de Conta Bancária
 
-routes.put("/createContaBancaria/:id", ContaBancariaUser.updateContaBancaria);
-routes.get("/searchContaBancaria/:email", ContaBancariaUser.getContaBancariaByEmail);
+routes.post("/createContaBancaria", ContaBancariaUser.createContaBancaria);
+routes.put("/updateContaBancaria/:id", ContaBancariaUser.updateContaBancaria);
+routes.get("/searchContaBancaria", ContaBancariaUser.getContaBancariaById);
 routes.get("/searchContaBancariaAll", ContaBancariaUser.getContaBancariaAll);
-routes.delete("/deleteContaBancaria/:email", ContaBancariaUser.deleteContaBancaria);
+routes.delete("/deleteContaBancaria", ContaBancariaUser.deleteContaBancaria);
 
 export default routes;
