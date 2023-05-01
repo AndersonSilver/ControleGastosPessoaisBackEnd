@@ -70,14 +70,14 @@ model Financeiro {
 
 model Receita {
   id        Int     @id @default(autoincrement())
-  valor     Int?
+  valor     Float?
   status    String?
   data      String?
   descricao String?
   categoria String?
   conta     String?
   user      User    @relation(fields: [userId], references: [id])
-  userId    Int     
+  userId    Int
 }
 
 model Despesa {
@@ -89,7 +89,7 @@ model Despesa {
   categoria String?
   conta     String?
   user      User    @relation(fields: [userId], references: [id])
-  userId    Int     
+  userId    Int
 }
 
 model Transferencia {
@@ -100,7 +100,7 @@ model Transferencia {
   paraConta  String?
   valor      Int?
   user       User    @relation(fields: [userId], references: [id])
-  userId     Int     
+  userId     Int
 }
 
 model CartaoCredito {
@@ -111,7 +111,7 @@ model CartaoCredito {
   dataFechamento String?
   bandeira       String?
   user           User    @relation(fields: [userId], references: [id])
-  userId         Int     
+  userId         Int
 }
 
 model ContaBancaria {
@@ -121,5 +121,5 @@ model ContaBancaria {
   tipoConta   String?
   saldo       Int?
   user        User    @relation(fields: [userId], references: [id])
-  userId      Int     
+  userId      Int
 }
