@@ -58,6 +58,7 @@ routes.delete("/deleteDespesa", DespesaUser.deleteDespesa);
 routes.post("/createReceita", ReceitaUser.createReceita);
 routes.put("/updateReceita", ReceitaUser.updateReceita);
 routes.get("/searchReceita", ReceitaUser.getReceitaById);
+routes.get("/searchReceitaUni", ReceitaUser.getReceitaByIdReceita);
 routes.get("/searchReceitaAll", ReceitaUser.getReceitaAll);
 routes.delete("/deleteReceita", ReceitaUser.deleteReceita);
 

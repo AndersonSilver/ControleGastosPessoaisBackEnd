@@ -100,6 +100,21 @@ class ReceitaUserControler {
       return res.status(400).json({ message: "Erro ao buscar Receita" });
     }
   }
+  async getReceitaByIdReceita(req, res) {
+    const existingUserId = req.query.id;
+
+    try {
+      const receita = await prismaClient.Receita.findMany({
+        where: {
+            id: parseInt(existingUserId),
+        },
+      });
+      return res.status(200).json(receita);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ message: "Erro ao buscar Receita" });
+    }
+  }
   async getReceitaAll(req, res) {
     try {
       const receita = await prismaClient.Receita.findMany();
