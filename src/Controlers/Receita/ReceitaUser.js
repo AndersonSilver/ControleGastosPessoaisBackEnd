@@ -57,9 +57,13 @@ class ReceitaUserControler {
         conta,
       } = req.body;
 
+      if(existingUserId == null){
+        return res.status(400).json({ message: "ID não encontrado" });
+      }
+
       const receita = await prismaClient.Receita.update({
         where: {
-          userId: existingUserId,
+          id: existingUserId,
         },
         data: {
           valor: Number(valor),
@@ -102,6 +106,12 @@ class ReceitaUserControler {
   }
   async getReceitaByIdReceita(req, res) {
     const existingUserId = req.query.id;
+    if (existingUserId == null){
+      return res.status(400).json({ message: "ID não encontrado" });
+    }
+    if (!/^\d+$/.test(existingUserId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
 
     try {
       const receita = await prismaClient.Receita.findMany({
