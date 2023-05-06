@@ -45,7 +45,7 @@ class DespesaUserControler {
   }
   async updateDespesa(req, res) {
     try {
-      const existingUserId = req.params.id;
+      const existingUserId = req.query.id;
 
       const {
         valor,
@@ -89,6 +89,34 @@ class DespesaUserControler {
     } catch (err) {
       console.log(err);
       return res.status(400).json({ message: "Erro ao buscar dados financeiros" });
+    }
+  }
+  async getDespesaByIdDespesa(req, res) {
+
+    const existingUserId = req.query.id;
+
+    if (existingUserId == null){
+      return res.status(400).json({ message: "ID não encontrado" });
+    }
+
+    if (!/^\d+$/.test(existingUserId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    try {
+      const despesa = await prismaClient.Despesa.findMany({
+        where: {
+            id: parseInt(existingUserId),
+        },
+      });
+
+      return res.status(200).json(despesa);
+
+    } catch (error) {
+
+      console.log(error);
+      return res.status(400).json({ message: "Erro ao buscar Despesa" });
+      
     }
   }
   async getDespesaAll(req, res) {
