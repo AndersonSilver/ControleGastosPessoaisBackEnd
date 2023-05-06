@@ -47,7 +47,7 @@ class ContaBancariaUserControler {
     }
     async updateContaBancaria(req, res) {
         try {
-            const existingUserId = req.params.id;
+            const existingUserId = req.query.id;
             const {
                 instituicao,
                 descricao,
@@ -88,6 +88,34 @@ class ContaBancariaUserControler {
             return res.status(400).json({ message: "Erro ao buscar Conta Bancária" });
         }
     }
+    async getContaBancariaByIdContaBancaria(req, res) {
+
+        const existingUserId = req.query.id;
+    
+        if (existingUserId == null){
+          return res.status(400).json({ message: "ID não encontrado" });
+        }
+    
+        if (!/^\d+$/.test(existingUserId)) {
+          return res.status(400).json({ message: "Invalid user ID" });
+        }
+    
+        try {
+          const contaBancaria = await prismaClient.ContaBancaria.findMany({
+            where: {
+                id: parseInt(existingUserId),
+            },
+          });
+    
+          return res.status(200).json(contaBancaria);
+    
+        } catch (error) {
+    
+          console.log(error);
+          return res.status(400).json({ message: "Erro ao buscar o Cartao de Crédito" });
+          
+        }
+      }
     async getContaBancariaAll(req, res) {
         try{
             const contaBancaria = await prismaClient.ContaBancaria.findMany();
