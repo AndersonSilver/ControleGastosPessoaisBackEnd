@@ -51,7 +51,7 @@ class CartaoCreditoUserControler {
   }
   async updateCartaoCredito(req, res) {
     try {
-      const existingUserId = req.params.id;
+      const existingUserId = req.query.id;
 
       const {
         nome,
@@ -94,6 +94,34 @@ class CartaoCreditoUserControler {
     } catch (error) {
       console.log(error);
       return res.status(400).json({ message: "Erro ao buscar Cartao de Crédito" });
+    }
+  }
+  async getCartaoCreditoByIdCartaoCredito(req, res) {
+
+    const existingUserId = req.query.id;
+
+    if (existingUserId == null){
+      return res.status(400).json({ message: "ID não encontrado" });
+    }
+
+    if (!/^\d+$/.test(existingUserId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    try {
+      const CartaoCredito = await prismaClient.CartaoCredito.findMany({
+        where: {
+            id: parseInt(existingUserId),
+        },
+      });
+
+      return res.status(200).json(CartaoCredito);
+
+    } catch (error) {
+
+      console.log(error);
+      return res.status(400).json({ message: "Erro ao buscar o Cartao de Crédito" });
+      
     }
   }
   async getCartaoCreditoAll(req, res) {

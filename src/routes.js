@@ -73,8 +73,9 @@ routes.delete("/deleteTransferencia/:email", TransferenciaUser.deleteTransferenc
 // Rotas de Cartão de Crédito
 
 routes.post("/createCartaoCredito", CartaoCreditoUser.createCartaoCredito)
-routes.put("/createCartaoCredito/:id", CartaoCreditoUser.updateCartaoCredito);
+routes.put("/updateCartaoCredito", CartaoCreditoUser.updateCartaoCredito);
 routes.get("/searchCartaoCredito", CartaoCreditoUser.getCartaoCreditoById);
+routes.get("/searchCartaoCreditoUni", CartaoCreditoUser.getCartaoCreditoByIdCartaoCredito)
 routes.get("/searchCartaoCreditoAll", CartaoCreditoUser.getCartaoCreditoAll);
 routes.delete("/deleteCartaoCredito", CartaoCreditoUser.deleteCartaoCredito);
 
