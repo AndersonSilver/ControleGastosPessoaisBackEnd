@@ -71,6 +71,7 @@ model Financeiro {
 model Receita {
   id        Int     @id @default(autoincrement())
   valor     Float?
+  tipo      String?
   status    String?
   data      String?
   descricao String?
@@ -82,6 +83,7 @@ model Receita {
 
 model Despesa {
   id        Int     @id @default(autoincrement())
+  tipo      String?
   valor     Int?
   status    String?
   data      String?

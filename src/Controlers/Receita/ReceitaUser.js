@@ -7,6 +7,7 @@ class ReceitaUserControler {
       const { valor, status, data, descricao, categoria, conta } = req.body;
   
       const existingUserId = req.query.id;
+      let tipo;
 
       if (!/^\d+$/.test(existingUserId)) {
         return res.status(400).json({ message: "Invalid user ID" });
@@ -25,6 +26,7 @@ class ReceitaUserControler {
       const receita = await prismaClient.Receita.create({
         data: {
           valor: Number(valor),
+          tipo: "Receita",
           status, 
           data,
           descricao,
