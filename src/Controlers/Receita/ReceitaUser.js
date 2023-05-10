@@ -12,7 +12,15 @@ class ReceitaUserControler {
       if (!/^\d+$/.test(existingUserId)) {
         return res.status(400).json({ message: "Invalid user ID" });
       }
-  
+      
+      if (existingUserId == null){
+        return res.status(400).json({ message: "ID não encontrado" });
+      }
+
+      if (valor === null || status === null || data === null || descricao === null || categoria === null || conta === null) {
+        return res.status(400).json({ message: "Um dos campos fornecidos é inválido" });
+      }
+
       const user = await prismaClient.user.findFirst({
         where: {
           id: parseInt(existingUserId),
