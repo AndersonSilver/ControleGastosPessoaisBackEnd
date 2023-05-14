@@ -87,5 +87,6 @@ routes.get("/searchContaBancariaUni", ContaBancariaUser.getContaBancariaByIdCont
 routes.get("/searchContaBancaria", ContaBancariaUser.getContaBancariaById);
 routes.get("/searchContaBancariaAll", ContaBancariaUser.getContaBancariaAll);
 routes.delete("/deleteContaBancaria", ContaBancariaUser.deleteContaBancaria);
+routes.post("/somatorioSaldoContaBancaria", ContaBancariaUser.somatorioSaldoContaBancaria);
 
 export default routes;

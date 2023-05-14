@@ -140,6 +140,35 @@ class ContaBancariaUserControler {
             return res.status(400).json({ message: "Erro ao deletar Conta Bancária" });
         }
     }
+    async somatorioSaldoContaBancaria(req, res) {
+        
+        const existingUserId = req.query.id;
+        const saldo = req.body;
+
+        if (existingUserId == null){
+            return res.status(400).json({ message: "ID não encontrado" });
+        }
+
+        if (!/^\d+$/.test(existingUserId)) {
+            return res.status(400).json({ message: "Invalid user ID" });
+        }
+
+        try {
+            const contaBancaria = await prismaClient.ContaBancaria.findMany({
+                where: {
+                    id: parseInt(existingUserId),
+                },
+            });
+
+            contaBancaria.saldo += contaBancaria.saldo + saldo;
+
+            return res.status(200).json(saldoTotal);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Erro ao buscar Conta Bancária" });
+        }
+    }
 }
 
 export default new ContaBancariaUserControler();
