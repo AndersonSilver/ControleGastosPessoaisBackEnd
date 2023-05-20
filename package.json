@@ -1,6 +1,7 @@
 {
   "name": "GastosBackEndPrisma",
   "version": "1.0.0",
+  "main": "src/server.js",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js"
