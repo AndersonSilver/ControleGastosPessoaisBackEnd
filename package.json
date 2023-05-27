@@ -16,6 +16,7 @@
     "js": "^0.1.0",
     "jsonwebtoken": "^9.0.0",
     "jwt": "^0.2.0",
+    "nodejs-base64": "^2.0.0",
     "prisma": "^4.14.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
