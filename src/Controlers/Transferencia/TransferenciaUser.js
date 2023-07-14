@@ -1,9 +1,59 @@
+import { PrismaClient } from "@prisma/client";
 import prismaClient from "../../prisma";
 
 class TransferenciaUserControler {
+
+  async createTransferencia(req, res) {
+  
+    try {
+
+      const existingUserId = req.query.id;
+
+      const {
+        data,
+        observacao,
+        deConta,
+        paraConta,
+        valor
+      } = req.body;
+
+      const user = await prismaClient.user.findFirst({
+        where: {
+          id: parseInt(existingUserId),
+        },
+      });
+
+      const transferencia = await prismaClient.Transferencia.create({
+
+        data: {
+          data,
+          observacao,
+          deConta,
+          paraConta,
+          valor: Number(valor),
+          user: {
+            connect: {
+                id: user.id,
+            },
+          },
+        },
+        
+      });
+
+      return res.status(200).json({"Transferencia efetuada com sucesso": transferencia});
+
+    } catch (error) {
+      
+      console.log(error);
+
+      return res.status(400).json({ message: "Erro ao efetuar Transferencia" });
+
+    }
+  
+  }
   async updateTransferencia(req, res) {
     try {
-      const existingUserId = req.params.id;
+      const existingUserId = req.query.id;
 
       const {
         data,

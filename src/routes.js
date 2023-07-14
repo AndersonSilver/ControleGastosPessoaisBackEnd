@@ -65,7 +65,8 @@ routes.delete("/deleteReceita", ReceitaUser.deleteReceita);
 
 // Rotas de Transferencia
 
-routes.put("/createTransferencia/:id", TransferenciaUser.updateTransferencia);
+routes.post("/createTransferencia", TransferenciaUser.createTransferencia);
+routes.put("/updateTransferencia", TransferenciaUser.updateTransferencia);
 routes.get("/searchTransferencia/:email", TransferenciaUser.getTransferenciaByEmail);
 routes.get("/searchTransferenciaAll", TransferenciaUser.getTransferenciaAll);
 routes.delete("/deleteTransferencia/:email", TransferenciaUser.deleteTransferencia);

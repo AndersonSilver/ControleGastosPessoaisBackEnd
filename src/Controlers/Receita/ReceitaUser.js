@@ -10,7 +10,7 @@ class ReceitaUserControler {
       let tipo;
 
       if (!/^\d+$/.test(existingUserId)) {
-        return res.status(400).json({ message: "Invalid user ID" });
+        return res.status(400).json({ message: "ID do usuario incorreto" });
       }
       
       if (existingUserId == null){
@@ -30,8 +30,9 @@ class ReceitaUserControler {
       if (!user) {
         return res.status(400).json({ message: "User not found" });
       }
-      console.log(user.id)
+
       const receita = await prismaClient.Receita.create({
+
         data: {
           valor: Number(valor),
           tipo: "Receita",
@@ -45,13 +46,19 @@ class ReceitaUserControler {
                 id: user.id,
             },
         },
+
         },
       });
   
       return res.status(200).json(receita);
+
+
     } catch (error) {
+
       console.log(error);
+
       return res.status(400).json({ message: "Erro ao criar dados Receitas" });
+
     }
   }
   async updateReceita(req, res) {
