@@ -81,13 +81,13 @@ class TransferenciaUserControler {
       return res.status(400).json({ message: "Erro ao atualizar dados financeiros" });
     }
   }
-  async getTransferenciaByEmail(req, res) {
+  async getTransferenciaById(req, res) {
     try {
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
       const transferencia = await prismaClient.Transferencia.findMany({
         where:{
           user:{
-            email: existingUserEmail
+            id: parseInt(existingUserId)
           },
         },
       });
@@ -108,16 +108,18 @@ class TransferenciaUserControler {
   }
   async deleteTransferencia(req, res) {
     try {
-      const existingUserEmail = req.params.email;
+      const existingUserId = req.query.id;
 
       const transferencia = await prismaClient.Transferencia.deleteMany({
         where:{
-          user:{
-            email: existingUserEmail
-          },
+            id: Number(existingUserId)
         },
       });
-      return res.status(200).json(transferencia);
+
+
+      return res.status(200).json({ message: "Dados financeiros deletados com sucesso" });
+
+
     } catch (error) {
       console.log(error);
       return res.status(400).json({ message: "Erro ao deletar dados financeiros" });

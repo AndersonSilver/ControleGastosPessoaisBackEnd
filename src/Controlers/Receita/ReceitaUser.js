@@ -161,7 +161,11 @@ class ReceitaUserControler {
             id: Number(existingUserId),
         },
       });
-      return res.status(200).json(receita);
+
+
+      return res.status(200).json({ message: "Receita deletada com sucesso" });
+
+
     } catch (error) {
       console.log(error);
       return res.status(400).json({ message: "Erro ao deletar dados financeiros" });      

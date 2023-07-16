@@ -67,9 +67,9 @@ routes.delete("/deleteReceita", ReceitaUser.deleteReceita);
 
 routes.post("/createTransferencia", TransferenciaUser.createTransferencia);
 routes.put("/updateTransferencia", TransferenciaUser.updateTransferencia);
-routes.get("/searchTransferencia/:email", TransferenciaUser.getTransferenciaByEmail);
+routes.get("/searchTransferencia", TransferenciaUser.getTransferenciaById);
 routes.get("/searchTransferenciaAll", TransferenciaUser.getTransferenciaAll);
-routes.delete("/deleteTransferencia/:email", TransferenciaUser.deleteTransferencia);
+routes.delete("/deleteTransferencia", TransferenciaUser.deleteTransferencia);
 
 // Rotas de Cartão de Crédito
 
