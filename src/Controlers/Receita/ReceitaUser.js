@@ -1,23 +1,29 @@
 import prismaClient from "../../prisma";
 
 class ReceitaUserControler {
-
   async createReceita(req, res) {
     try {
       const { valor, status, data, descricao, categoria, conta } = req.body;
-  
+
       const existingUserId = req.query.id;
       let tipo;
 
       if (!/^\d+$/.test(existingUserId)) {
         return res.status(400).json({ message: "ID do usuario incorreto" });
       }
-      
-      if (existingUserId == null){
+
+      if (existingUserId == null) {
         return res.status(400).json({ message: "ID não encontrado" });
       }
 
-      if (valor === null || status === null || data === null || descricao === null || categoria === null || conta === null) {
+      if (
+        valor === null ||
+        status === null ||
+        data === null ||
+        descricao === null ||
+        categoria === null ||
+        conta === null
+      ) {
         return res.status(400).json({ message: "Um dos campos fornecidos é inválido" });
       }
 
@@ -26,55 +32,42 @@ class ReceitaUserControler {
           id: parseInt(existingUserId),
         },
       });
-  
+
       if (!user) {
         return res.status(400).json({ message: "User not found" });
       }
 
       const receita = await prismaClient.Receita.create({
-
         data: {
           valor: Number(valor),
           tipo: "Receita",
-          status, 
+          status,
           data,
           descricao,
           categoria,
           conta,
           user: {
             connect: {
-                id: user.id,
+              id: user.id,
             },
-        },
-
+          },
         },
       });
-  
+
       return res.status(200).json(receita);
-
-
     } catch (error) {
-
       console.log(error);
 
       return res.status(400).json({ message: "Erro ao criar dados Receitas" });
-
     }
   }
   async updateReceita(req, res) {
     try {
       const existingUserId = parseInt(req.query.id);
 
-      const {
-        valor,
-        status,
-        data,
-        descricao,
-        categoria,
-        conta,
-      } = req.body;
+      const { valor, status, data, descricao, categoria, conta } = req.body;
 
-      if(existingUserId == null){
+      if (existingUserId == null) {
         return res.status(400).json({ message: "ID não encontrado" });
       }
 
@@ -94,9 +87,9 @@ class ReceitaUserControler {
       return res.status(200).json(receita);
     } catch (error) {
       console.log(error);
-      if (error.code === 'P2025') {
+      if (error.code === "P2025") {
         return res.status(404).json({ message: "Receita não encontrada" });
-      } else if (error.code === 'P2002') {
+      } else if (error.code === "P2002") {
         return res.status(422).json({ message: "Um dos campos fornecidos é inválido" });
       } else {
         return res.status(500).json({ message: "Erro ao atualizar dados da Receita" });
@@ -104,7 +97,6 @@ class ReceitaUserControler {
     }
   }
   async getReceitaById(req, res) {
-
     const existingUserId = req.query.id;
 
     try {
@@ -123,7 +115,7 @@ class ReceitaUserControler {
   }
   async getReceitaByIdReceita(req, res) {
     const existingUserId = req.query.id;
-    if (existingUserId == null){
+    if (existingUserId == null) {
       return res.status(400).json({ message: "ID não encontrado" });
     }
     if (!/^\d+$/.test(existingUserId)) {
@@ -133,7 +125,7 @@ class ReceitaUserControler {
     try {
       const receita = await prismaClient.Receita.findMany({
         where: {
-            id: parseInt(existingUserId),
+          id: parseInt(existingUserId),
         },
       });
       return res.status(200).json(receita);
@@ -152,23 +144,19 @@ class ReceitaUserControler {
     }
   }
   async deleteReceita(req, res) {
-    
     try {
       const existingUserId = req.query.id;
 
       const receita = await prismaClient.Receita.deleteMany({
         where: {
-            id: Number(existingUserId),
+          id: Number(existingUserId),
         },
       });
 
-
       return res.status(200).json({ message: "Receita deletada com sucesso" });
-
-
     } catch (error) {
       console.log(error);
-      return res.status(400).json({ message: "Erro ao deletar dados financeiros" });      
+      return res.status(400).json({ message: "Erro ao deletar dados financeiros" });
     }
   }
 }

@@ -9,12 +9,12 @@ import ReceitaUser from "./Controlers/Receita/ReceitaUser.js";
 import TransferenciaUser from "./Controlers/Transferencia/TransferenciaUser.js";
 import CartaoCreditoUser from "./Controlers/CartaoCredito/CartaoCreditoUser.js";
 import ContaBancariaUser from "./Controlers/ContaBancaria/ContaBancariaUser.js";
-import AuthUserController from "./Controlers/Usuario/AuthUserController.js"
-import AuthMidlleware from "./Midlewares/AuthMidlleware.js"
+import AuthUserController from "./Controlers/Usuario/AuthUserController.js";
+import AuthMidlleware from "./Midlewares/AuthMidlleware.js";
 
 const routes = new Router();
 
-routes.get('/session', AuthUserController.authUserController);
+routes.get("/session", AuthUserController.authUserController);
 
 // Rotas de Usuário - CONCLUIDO
 routes.post("/createUser", UserControllers.createUsers);
@@ -23,20 +23,21 @@ routes.use(AuthMidlleware);
 
 routes.get("/searchUserAll", UserControllers.getUser);
 routes.get("/searchUser", UserControllers.getUserByEmail);
-routes.put("/updateUser/:email", UserControllers.updateUser);
-routes.delete("/deleteUser/:email", UserControllers.deleteUser);
+routes.put("/updateUser", UserControllers.updateUser);
+routes.delete("/deleteUser", UserControllers.deleteUser);
 
 // Rotas de Dados Pessoais - CONCLUIDO
 routes.put("/createDadosPessoais", DadosPessoaisUser.updateDadosPessoais);
-routes.get("/searchDadosPessoais",DadosPessoaisUser.getDadosPessoaisById);
+routes.get("/searchDadosPessoais", DadosPessoaisUser.getDadosPessoaisById);
 routes.get("/searchDadosPessoaisAll", DadosPessoaisUser.getDadosPessoaisAll);
-routes.delete("/deleteDadosPessoais/:email", DadosPessoaisUser.deleteDadosPessoais);
+routes.delete("/deleteDadosPessoais", DadosPessoaisUser.deleteDadosPessoais);
 
 // Rotas de Profissional - CONCLUIDO
-routes.put("/createProfissional", ProfissionalUser.updateProfissional);
+// routes.post("/createProfissional", ProfissionalUser.createProfissional);
+routes.put("/updateProfissional", ProfissionalUser.updateProfissional);
 routes.get("/searchProfissional", ProfissionalUser.getProfissionalByEmail);
 routes.get("/searchProfissionalAll", ProfissionalUser.getProfissionalAll);
-routes.delete("/deleteProfissional/:email", ProfissionalUser.deleteProfissional);
+routes.delete("/deleteProfissional", ProfissionalUser.deleteProfissional);
 
 // Rotas de Financeiro - CONCLUIDO
 
@@ -73,10 +74,10 @@ routes.delete("/deleteTransferencia", TransferenciaUser.deleteTransferencia);
 
 // Rotas de Cartão de Crédito
 
-routes.post("/createCartaoCredito", CartaoCreditoUser.createCartaoCredito)
+routes.post("/createCartaoCredito", CartaoCreditoUser.createCartaoCredito);
 routes.put("/updateCartaoCredito", CartaoCreditoUser.updateCartaoCredito);
 routes.get("/searchCartaoCredito", CartaoCreditoUser.getCartaoCreditoById);
-routes.get("/searchCartaoCreditoUni", CartaoCreditoUser.getCartaoCreditoByIdCartaoCredito)
+routes.get("/searchCartaoCreditoUni", CartaoCreditoUser.getCartaoCreditoByIdCartaoCredito);
 routes.get("/searchCartaoCreditoAll", CartaoCreditoUser.getCartaoCreditoAll);
 routes.delete("/deleteCartaoCredito", CartaoCreditoUser.deleteCartaoCredito);
 

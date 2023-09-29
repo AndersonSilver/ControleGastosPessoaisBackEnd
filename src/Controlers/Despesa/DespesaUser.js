@@ -4,41 +4,41 @@ class DespesaUserControler {
   async createDespesa(req, res) {
     try {
       const { valor, status, data, descricao, categoria, conta } = req.body;
-  
+
       const existingUserId = req.query.id;
       let tipo;
 
       if (!/^\d+$/.test(existingUserId)) {
         return res.status(400).json({ message: "Invalid user ID" });
       }
-  
+
       const user = await prismaClient.user.findFirst({
         where: {
           id: parseInt(existingUserId),
         },
       });
-  
+
       if (!user) {
         return res.status(400).json({ message: "User not found" });
       }
-      console.log(user.id)
+      console.log(user.id);
       const despesa = await prismaClient.Despesa.create({
         data: {
           valor: Number(valor),
           tipo: "Despesa",
-          status, 
+          status,
           data,
           descricao,
           categoria,
           conta,
           user: {
             connect: {
-                id: user.id,
+              id: user.id,
             },
-        },
+          },
         },
       });
-  
+
       return res.status(200).json(despesa);
     } catch (error) {
       console.log(error);
@@ -49,14 +49,7 @@ class DespesaUserControler {
     try {
       const existingUserId = req.query.id;
 
-      const {
-        valor,
-        status,
-        data,
-        descricao,
-        categoria,
-        conta,
-      } = req.body;
+      const { valor, status, data, descricao, categoria, conta } = req.body;
 
       const despesa = await prismaClient.Despesa.update({
         where: {
@@ -94,10 +87,9 @@ class DespesaUserControler {
     }
   }
   async getDespesaByIdDespesa(req, res) {
-
     const existingUserId = req.query.id;
 
-    if (existingUserId == null){
+    if (existingUserId == null) {
       return res.status(400).json({ message: "ID não encontrado" });
     }
 
@@ -108,17 +100,14 @@ class DespesaUserControler {
     try {
       const despesa = await prismaClient.Despesa.findMany({
         where: {
-            id: parseInt(existingUserId),
+          id: parseInt(existingUserId),
         },
       });
 
       return res.status(200).json(despesa);
-
     } catch (error) {
-
       console.log(error);
       return res.status(400).json({ message: "Erro ao buscar Despesa" });
-      
     }
   }
   async getDespesaAll(req, res) {
@@ -136,7 +125,7 @@ class DespesaUserControler {
 
       const despesa = await prismaClient.Despesa.deleteMany({
         where: {
-            id: Number(existingUserId),
+          id: Number(existingUserId),
         },
       });
       return res.status(200).json(despesa);
