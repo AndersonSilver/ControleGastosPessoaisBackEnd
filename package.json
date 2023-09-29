@@ -17,6 +17,7 @@
     "js": "^0.1.0",
     "jsonwebtoken": "^9.0.2",
     "jwt": "^0.2.0",
+    "node-gyp": "^9.4.0",
     "prisma": "^5.3.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
