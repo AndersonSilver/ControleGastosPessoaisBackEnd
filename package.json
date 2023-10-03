@@ -1,10 +1,13 @@
 {
   "name": "ControleGastosPessoaisBackEnd",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/AndersonSilver/ControleGastosPessoaisBackEnd.git",
   "author": "AndersonSilver <andersonsilver18@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "axios": "^1.5.1",
